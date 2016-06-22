@@ -12,9 +12,6 @@
 {% get_providers as socialaccount_providers %}
 
 {% if socialaccount_providers %}
-<p>{% blocktrans with site.name as site_name %}Please sign in with one
-of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
 <div class="socialaccount_ballot">
 
@@ -33,13 +30,33 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
 {% endif %}
 
-<form class="login" method="POST" action="{% url 'account_login' %}">
+<form class="login form-horizontal" method="POST" action="{% url 'account_login' %}">
   {% csrf_token %}
-  {{ form.as_p }}
+
+<div class="form-group">
+    <label for="username" class="col-sm-2 control-label">Username</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="username" name="login" placeholder="Username">
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control" id="inputPassword3" name="password" placeholder="Password">
+    </div>
+  </div>
+
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+        <button class="primaryAction btn btn-default" type="submit">{% trans "Sign In" %}</button>
+
+    </div>
+  </div>
+
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
-  <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
 </form>
 
 {% endblock %}

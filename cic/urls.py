@@ -20,7 +20,7 @@ from django.conf.urls import include
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^pf-repo/register$', register, name='register'),
+    url(r'^$', register, name='register'),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^home/', home, name='home'),
 

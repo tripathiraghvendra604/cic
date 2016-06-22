@@ -8,6 +8,10 @@ from django.contrib.auth.models import User
 
 
 def register(request):
+
+    if request.user.is_authenticated():
+        return render(request, 'dashboard.html')
+
     form = RegistrationForm(request.POST or None)
     if form.is_valid():
         if request.method == 'POST':
